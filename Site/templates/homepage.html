@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora de CR</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 50px;
+        }
+        input, button {
+            padding: 10px;
+            margin: 5px;
+        }
+        table {
+            margin: auto;
+            border-collapse: collapse;
+            width: 50%;
+        }
+        th, td {
+            border: 1px solid black;
+            padding: 10px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <h1>Calculadora de Coeficiente de Rendimento (CR)</h1>
+
+    <table>
+        <tr>
+            <th>Nota</th>
+            <th>Carga Horária</th>
+        </tr>
+        <tr>
+            <td><input type="number" id="nota1" placeholder="Ex: 8.5"></td>
+            <td><input type="number" id="ch1" placeholder="Ex: 60"></td>
+        </tr>
+        <tr>
+            <td><input type="number" id="nota2" placeholder="Ex: 7.2"></td>
+            <td><input type="number" id="ch2" placeholder="Ex: 40"></td>
+        </tr>
+        <tr>
+            <td><input type="number" id="nota3" placeholder="Ex: 9.0"></td>
+            <td><input type="number" id="ch3" placeholder="Ex: 80"></td>
+        </tr>
+    </table>
+
+    <button onclick="calcularCR()">Calcular CR</button>
+    <h2 id="resultado"></h2>
+
+    <script>
+        function calcularCR() {
+            let notas = [
+                parseFloat(document.getElementById("nota1").value),
+                parseFloat(document.getElementById("nota2").value),
+                parseFloat(document.getElementById("nota3").value)
+            ];
+            let cargas = [
+                parseFloat(document.getElementById("ch1").value),
+                parseFloat(document.getElementById("ch2").value),
+                parseFloat(document.getElementById("ch3").value)
+            ];
+
+            let somaNotasPonderadas = 0;
+            let somaCargas = 0;
+
+            for (let i = 0; i < notas.length; i++) {
+                if (!isNaN(notas[i]) && !isNaN(cargas[i])) {
+                    somaNotasPonderadas += notas[i] * cargas[i];
+                    somaCargas += cargas[i];
+                }
+            }
+
+            let cr = somaNotasPonderadas / somaCargas;
+            document.getElementById("resultado").innerText = "Seu CR é: " + cr.toFixed(2);
+        }
+    </script>
+</body>
+</html>
